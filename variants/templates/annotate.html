@@ -1,0 +1,67 @@
+{%  include 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+
+
+</head>
+<style>
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+.label
+{
+
+    width: 200px;
+}
+</style>
+<body>
+<script type="text/javascript">
+    $(document).on('click', '.browse', function(){
+  var file = $(this).parent().parent().parent().find('.file');
+  file.trigger('click');
+});
+$(document).on('change', '.file', function(){
+  $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+});
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <h1>Variant Annotations</h1>
+        <hr>
+      <form enctype='multipart/form-data' action={% url 'annotates' %} method='POST' class="form-horizontal">
+     {% csrf_token %}
+          <div class="form-group row">
+              <label class="col-lg-2 "> Variant Call Format (VCF)  </label>
+              <input  class="file" type='file' name='myfile' >
+              <div class="input-group col-xs-6">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                  <input type="text" class="form-control input-md" disabled placeholder="Upload .vcf file">
+                  <span class="input-group-btn">
+                      <button class="browse btn btn-primary input-md" type="button">Browse <i class="glyphicon glyphicon-search"></i></button>
+                   </span>
+              </div>
+          </div>
+          <br>
+          <br>
+
+          <br>
+          <br>
+          <br>
+		  <center> <input type='submit' class="btn btn-primary btn-lg" value="Annotate"/>  </center>
+	  </form>
+    </div>
+    <hr>
+</div>
+</body>
+</html>

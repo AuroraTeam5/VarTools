@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Django">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="DataSet4_db">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="DataSet2_db"/>
+    <schema id="3" name="DataSet_db"/>
+    <schema id="4" name="django_db"/>
+    <schema id="5" name="EXAC2_db"/>
+    <schema id="6" name="EXAC3_db"/>
+    <schema id="7" name="EXAC_TEST_db"/>
+    <schema id="8" name="information_schema"/>
+    <schema id="9" name="mysql"/>
+    <schema id="10" name="performance_schema"/>
+    <schema id="11" name="sys"/>
+  </database-model>
+</dataSource>

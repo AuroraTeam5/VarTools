@@ -1,0 +1,75 @@
+{%  include 'NavBar.html' %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1" xmlns="http://www.w3.org/1999/html">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style>
+    form
+    {
+        display: inline;
+    }</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <center><h1>Exome Browser | Alpha</h1></center>
+    <br>
+    <br>
+    <br>
+    <div class="form-group-lg">
+        <form action="{% url 'Route' %}" method="post">
+            {% csrf_token %}
+
+            <input type="text" name="Query" class="form-control" placeholder="Search for a gene, transcript, variant or region" >
+        </form>
+    </div>
+    <br>
+    <br>
+    <h3>Query Examples : </h3>
+
+
+    <b>Gene :</b>
+    <form action="{% url 'Route' %}" method="post"  display = "inline";> {% csrf_token %}
+
+        <input type="submit" class="btn-link" name="Query" value="G=MIR3687"> </form>
+
+    <font size="3">or</font>
+
+    <form action="{% url 'Route' %}" method="post"> {% csrf_token %}
+        <input type="submit" class="btn-link" name="Query" value="G=ENSG00000264063"></form>
+
+    <br>
+
+
+
+    <b>Transcript :</b>
+    <form action="{% url 'Route' %}" method="post"> {% csrf_token %}
+        <input type="submit" class="btn-link" name="Query" value="T=ENST00000577708"></form>
+
+    <br>
+
+    <b>Variant :</b>
+    <form action="{% url 'Route' %}" method="post"> {% csrf_token %}
+        <input type="submit" class="btn-link" name="Query" value="V=21-9825833-G-A"></form>
+
+    <font size="3">or</font>
+
+    <form action="{% url 'Route' %}" method="post"> {% csrf_token %}
+        <input type="submit" class="btn-link" name="Query" value="V=21:9825833 G/A"></form>
+
+    <br>
+
+    <b>Region :</b>
+    <form action="{% url 'Route' %}" method="post"> {% csrf_token %}
+        <input type="submit" class="btn-link" name="Query" value="R=21-9825790-9826277"></form>
+
+</div>
+
+</body>
+</html>

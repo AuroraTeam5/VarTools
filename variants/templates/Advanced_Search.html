@@ -1,0 +1,232 @@
+ {%  include 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" xmlns="http://www.w3.org/1999/html">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>{
+  .border-radius(0) !important;
+}
+
+#field {
+    margin-bottom:20px;
+}
+    </style>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+    $( "#form" ).keypress(function(e) {
+
+      if ( e.which == 13 ) {
+         e.preventDefault();
+
+      }
+    });
+
+    var next = 1;
+
+    $(".add-more").click(function(e){
+
+        e.preventDefault();
+        var addto = "#field" ;
+        next = next + 1;
+        var addRemove = "#field" + (next);
+        var newIn = '<select id="Operator'+ next  +'"name="query" class="selectpicker show-tick" title="Operator" data-width="fit"><option value="AND">AND</option><option value="OR">OR</option></select> <select data-size="13" id="type'+ next
+        +'" name="query" class="selectpicker show-tick" title="Type" data-width="fit" data-live-search="true"><option value= "Allele_Count"> Allele Count</option>'+
+                        '<option value= "Allele_Frequency"> Allele Frequency</option>
+                        <option value= "Allele_Number"> Allele Number</option>
+                        <option value= "AC_Adjusted"> Adj .Allele Count</option>
+                        <option value= "AC_African_American">AC African American</option>
+                        <option value= "AC_American">AC American</option>
+                        <option value= "AC_East_Asian">AC East Asian</option>
+                        <option value= "AC_Finnish">AC Finnish</option>
+                        <option value= "AC_Hemizygous">AC Hemizygous</option><option value="Gene_Symbol">Gene Symbol</option><option value= "Allele_Count "> Allele Count</option><option value= "Allele_Frequency "> Allele Frequency</option><option value= "Reference">Reference</option><option value="Allele">Allele</option><option value= "Position">Position</option></select><input autocomplete="off" class="input form-control" id="field' + next + '" name="query" type="text" style="width: 450px">';
+        var newInput = $(newIn);
+        var removeBtn = '<button id="remove' + (next) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
+        var removeButton = $(removeBtn);
+
+        $(addto).after(newInput);
+        $(addRemove).after(removeButton);
+        $("#field" + next).attr('data-source',$(addRemove).attr('data-source'));
+        $('.selectpicker').selectpicker('refresh');
+        $("#count").val(next);
+
+            $('.remove-me').click(function(e){
+
+                e.preventDefault();
+                var fieldNum = this.id.charAt(this.id.length-1);
+                var fieldID = "#field" + fieldNum;
+                var typeNum = this.id.charAt(this.id.length-1);
+                var typeID = "#type" + typeNum;
+                var operatorNum = this.id.charAt(this.id.length-1);
+                var operatorID = "#Operator" + operatorNum;
+
+                $(this).remove();
+                $(fieldID).remove();
+                $(typeID).selectpicker('destroy');
+                $(typeID).remove();
+                $(operatorID).selectpicker('destroy');
+                $(operatorID).remove();
+
+
+            });
+    });
+
+
+
+});
+
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = $(form1).serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+$(document).on('submit' , '#form1',function (e) {
+        e.preventDefault();
+        //var myEvent ={"ay7aga": "123", "jhd":"344"};
+        var myEvent = JSON.stringify($('form1').serializeObject());
+        $.ajax({
+            type: 'POST' ,
+            url: 'ComplexQuery_view',
+            dataType: 'text',
+            contentType: 'application/json; charset=utf-8',
+            data: myEvent,
+            success: function (result) {
+                $( '#s' ).html(result);
+                $('#div1').hide();
+            },
+
+        });
+    });
+
+
+</script>
+
+<div class="container " id="div1">
+    <h1>Complex Query Builder</h1>
+    <hr>
+	<div class="row">
+        <div class="col-lg-9">
+		<input type="hidden" name="count" value="1" />
+            <div class="well">
+                 <form class="form-inline" id="form1" name="form1">
+                    {% csrf_token %}
+                    <div id="field" >
+                        <select data-size="13" title="Type" id="type1" name="query" class="selectpicker show-tick" data-width="fit" data-live-search="true">
+                        <option value= "Chromosome_Number">Chromosome Number</option>
+                        <option value= "HGVS_Protein">HGVS Protein</option>
+                        <option value= "Position">Position</option>
+                        <option value= "Var_ID">dbSNP ID</option>
+                        <option value= "Reference">Reference</option>
+                        <option value= "Allele">Allele</option>
+                        <option value= "Quality">Quality</option>
+                        <option value= "Filter">Filter</option>
+                        <option value= "Gene_Symbol">Gene Symbol</option>
+                        <option value= "Allele_Count"> Allele Count</option>
+                        <option value= "Allele_Frequency"> Allele Frequency</option>
+                        <option value= "Allele_Number"> Allele Number</option>
+                        <option value= "AC_Adjusted"> Adj .Allele Count</option>
+                        <option value= "AC_African_American">AC African American</option>
+                        <option value= "AC_American">AC American</option>
+                        <option value= "AC_East_Asian">AC East Asian</option>
+                        <option value= "AC_Finnish">AC Finnish</option>
+                        <option value= "AC_Hemizygous">AC Hemizygous</option>
+                        <option value= "AC_Heterozygous">AC Heterozygous</option>
+                        <option value= "AC_Homozygous">AC Homozygous</option>
+                        <option value= "AC_Non_Finnish_European">AC Non-Finnish European</option>
+                        <option value= "AC_Other">AC Other</option>
+                        <option value= "AC_South_Asian">AC South Asian</option>
+                        <option value= "AN_African_American">AN African American</option>
+                        <option value= "AN_American">AN American</option>
+                        <option value= "AN_Adjusted"> Adj. Allele Number</option>
+                        <option value= "AN_East_Asian">AN East Asian</option>
+                        <option value= "AN_Finnish">AN Finnish</option>
+                        <option value= "AN_Non_Finnish">AN Non-Finnish</option>
+                        <option value= "AN_Other">AN Other</option>
+                        <option value= "AN_South_Asian">AN South Asian</option>
+                        <option value= "Read_Depth">Read Depth</option>
+                        <option value= "Genotype_Quality_MEAN">Genotype Quality MEAN</option>
+                        <option value= "GQ_Standard_Deviation">GQ Standard_Deviation</option>
+                        <option value= "Hemi_African_American">Hemi African American</option>
+                        <option value= "Hemi_American">Hemi American</option>
+                        <option value= "Hemi_East_Asian">Hemi East Asian</option>
+                        <option value= "Hemi_Finnish">Hemi Finnish</option>
+                        <option value= "Hemi_Non_Finnish_European">Hemi Non Finnish European</option>
+                        <option value= "Hemi_Other">Hemi Other</option>
+                        <option value= "Hemi_South_Asian">Hemi South Asian</option>
+                        <option value= "Het_African_American">Het African American</option>
+                        <option value= "Het_American">Het American</option>
+                        <option value= "Het_East_Asian">Het East Asian</option>
+                        <option value= "Het_Finnish">Het Finnish</option>
+                        <option value= "Het_Non_Finnish_European">Het Non Finnish European</option>
+                        <option value= "Het_Other">Het Other</option>
+                        <option value= "Het_South_Asian">Het South Asian</option>
+                        <option value= "Hom_African_American">Hom African American</option>
+                        <option value= "Hom_American">Hom American</option>
+                        <option value= "Hom_East_Asian">Hom East_Asian</option>
+                        <option value= "Hom_Finnish">Hom Finnish</option>
+                        <option value= "Hom_Non_Finnish_European_Homozygous">Hom Non Finnish European Homozygous</option>
+                        <option value= "Hom_Other">Hom Other</option>
+                        <option value= "Hom_South_Asian">Hom South Asian</option>
+                        <option value= "InbreedingCoef">Inbreeding Coefficient</option>
+
+                        </select>
+                        <input autocomplete="off" class="form-control" id="field1" name="query" type="text" style="width:500px"/>
+                        <button id="b1" class="btn add-more btn-primary " type="button">+</button>
+                     </div>
+
+
+                    <center> <input data-target="#div2" data-toggle="collapse" type="submit" class="btn btn-primary btn-lg"/>
+                        <div class="collapse" id="div2">
+                          <br>
+                            <strong>Please Wait <i class="fa fa-spinner fa-spin" style="font-size:24px"></i></strong>
+                        </div>
+                    </center>
+                 </form>
+
+            <br>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+           <div class="panel panel-default ">
+             <div class="panel-heading">Tips</div>
+               <div class="panel-body">
+                <medium>Press + to add another field </medium>
+
+               </div>
+           </div>
+        </div>
+    <hr>
+	</div>
+</div>
+ <aside id="s">
+   </aside>
+</body>
+</html>

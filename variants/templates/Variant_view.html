@@ -1,0 +1,178 @@
+{%  include 'NavBar.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+<style>
+.button {
+    background-color:white;
+    border: 2px solid lightsteelblue;
+    border-radius: 12px;
+    color: black;
+    padding: 10px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: lavender;
+}
+form
+{
+    display: inline;
+}
+</style>
+</head>
+<body>
+<div class="container">
+      <h1> Variant: {{ variant }}</h1>
+ <hr>
+<div class="alert alert-success">
+    Query Done in {{ query_time }} seconds
+  </div>
+   <ul>
+       <li ><b> Filter Status </b>{{ variant.Filter}}</li>
+       <li ><b> dbSNP </b>
+              {% if variant.Var_ID == '.'%}
+                Not found in dbSNP
+              {% else %}
+                  <a href="http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs={{ variant.Var_ID }}" target="_blank">{{ variant.Var_ID }}</a>
+               {%  endif %}</li>
+       <li><b> Allele Count </b> {{ varpop.AC_Adjusted}}</li>
+       <li><b> Allele Frequency </b>{{ allele_freq.7}}</li>
+
+   </ul>
+<hr>
+<div class="row">
+ <div class="col-sm-4" style="background-color:white;">
+   <h2><b>Annotations</b></h2>
+    <li>This variant falls on {{ trans_num }} Transcripts in {{ gene_num }} Gene(s) </li>
+
+     {% for list in list_of_annotations %}
+         <label> {{ list.0 }}</label>
+         <br>
+         {% for item in list.1 %}
+         <form action="{% url 'Gene_view' %}" method="post"> {% csrf_token %}
+          <input type="submit" class="btn-link" name="Query" value="{{ item.0 }}"></form>
+         {% if item.1|length == 1 %}
+         - <form action="{% url 'Transcript_view' %}" method="post"> {% csrf_token %}
+           <input type="submit" class="btn-link" name="Query" value="{{ item.1.0 }}"></form>
+         {% else %}
+        <form action="{% url 'Transcript_view' %}" method="post">
+         {% csrf_token %}
+         <select title="Transcripts" class="selectpicker show-menu-arrow" data-style="button" name="Query" onchange="submit();">
+        {% for i in item.1 %}
+            <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+         </select>
+         </form>
+         {% endif %}
+             <br>
+         {% endfor %}
+         <hr>
+     {% endfor %}
+  </div>
+
+
+  <div class="col-sm-8" style="background-color:white;">
+       <h3><b>Population Frequencies</b></h3>
+  <table>
+  <tr>
+    <th>Population</th>
+    <th>Allele Count</th>
+    <th>Allele Number</th>
+    <th>Number of homozygotes</th>
+    <th>Allele Frequency</th>
+
+
+  </tr>
+
+   <tr>
+    <td>South Asian</td>
+    <td>{{ varpop.AC_South_Asian }}</td>
+    <td>{{ varpop.AN_South_Asian}}</td>
+    <td>{{ varpop.Hom_South_Asian}}</td>
+       <td> {{ allele_freq.0 }}</td>
+   </tr>
+
+    <tr>
+    <td>African</td>
+    <td>{{ varpop.AC_African_American}}</td>
+    <td>{{ varpop.AN_African_American }}</td>
+    <td>{{ varpop.Hom_African_American }}</td>
+        <td> {{ allele_freq.1 }}</td>
+
+  </tr>
+  <tr>
+    <td>East Asian</td>
+    <td>{{ varpop.AC_East_Asian }}</td>
+    <td>{{ varpop.AN_East_Asian }}</td>
+    <td>{{ varpop.Hom_East_Asian}}</td>
+      <td> {{ allele_freq.2 }}</td>
+  </tr>
+
+    <tr>
+    <td>European Finnish</td>
+    <td>{{ varpop.AC_Finnish }}</td>
+    <td>{{ varpop.AN_Finnish}}</td>
+    <td>{{ varpop.Hom_Finnish}}</td>
+        <td> {{ allele_freq.3 }}</td>
+  </tr>
+  <tr>
+    <td>European Non_Finnish</td>
+    <td>{{ varpop.AC_Non_Finnish_European }}</td>
+    <td>{{ varpop.AN_Non_Finnish}}</td>
+    <td>{{ varpop.Hom_Non_Finnish_European_Homozygous}}</td>
+      <td> {{ allele_freq.4 }}</td>
+  </tr>
+
+  <tr>
+    <td>Latino</td>
+    <td>{{ varpop.AC_American}}</td>
+    <td>{{ varpop.AN_American }}</td>
+    <td>{{ varpop.Hom_American }}</td>
+      <td> {{ allele_freq.5 }}</td>
+
+  </tr>
+
+  <tr>
+    <td>Other</td>
+    <td>{{ varpop.AC_Other }}</td>
+    <td>{{ varpop.AN_Other}}</td>
+    <td>{{ varpop.Hom_Other}}</td>
+      <td> {{ allele_freq.6 }}</td>
+  </tr>
+
+    <tr>
+    <td><b>Total</b></td>
+    <td><b>{{ varpop.AC_Adjusted }}</b></td>
+    <td><b>{{ varpop.AN_Adjusted}}</b></td>
+    <td><b>{{ varpop.AC_Homozygous}}</b></td>
+      <td> <b>{{ allele_freq.7 }}</b></td>
+  </tr>
+
+
+  </table>
+</div>
+
+   </div>
+<hr>
+ </div>
+</body>
+

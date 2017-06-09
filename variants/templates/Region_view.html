@@ -1,0 +1,108 @@
+{%  include 'NavBar.html' %}
+
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style>
+.table-wrapper {
+  position:relative;
+}
+.table-scroll {
+  height:600px;
+  overflow:auto;
+  margin-top:20px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: lavender;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+      <h1> Region: {{ Region_Info }} </h1>
+     <hr>
+ <div class="alert alert-success">
+    Query Done in {{ query_time }} seconds
+  </div>
+
+      <h2> Genes </h2>
+ <hr>
+   <ul>
+       {% for gene in Genes_ID %}
+
+           <form action="{% url 'Gene_view' %}" method="post">
+               {% csrf_token %}
+
+     <li><a><input type="submit" class="btn-link" name="Query" value="{{ gene }}"></a></li> </form>
+
+
+        {% endfor %}
+   </ul>
+<hr>
+</div>
+  <div  class="table-wrapper " >
+      <div class="table-scroll">
+<div class="container col-sm-8" style="background-color:white;">
+     <br>
+
+  <table>
+  <tr>
+    <th>Variant</th>
+    <th>Chrom</th>
+    <th>Position</th>
+    <th>Filter</th>
+      <th>Consequence</th>
+     <th>Annotation</th>
+    <th>Allele Count</th>
+    <th>Allele Number</th>
+    <th>Number of Homozygotes</th>
+    <th>Allele Frequency</th>
+  </tr>
+<tr>
+{% for record in Variants %}
+<tr>
+
+            <td><form action="{% url 'variant_view' %}" method="post"> {% csrf_token %}
+    <font size="2" color="#4898fd"><input type="submit" class="btn-link" name="Query" value="{{ record.0 }}"></font></form></td>
+
+        <td><font size="2" color="Window">{{ record.1}}</font></td>
+        <td><font size="2" color="Window">{{ record.2}}</font></td>
+        <td><font size="2" color="Window">{{ record.3}}</font></td>
+        <td><font size="2" color="Window">{{ record.4}}</font></td>
+        <td><font size="2" color="Window">{{ record.5}}</font></td>
+        <td><font size="2" color="Window">{{ record.7}}</font></td>
+        <td><font size="2" color="Window">{{ record.8}}</font></td>
+        <td><font size="2" color="Window">{{ record.9}}</font></td>
+        <td><font size="2" color="Window">{{ record.10}}</font></td>
+
+        </tr>
+
+      {%endfor %}
+
+</table>
+
+</tr>
+</div>
+      </div>
+</div>
+</body>
+</html>
+

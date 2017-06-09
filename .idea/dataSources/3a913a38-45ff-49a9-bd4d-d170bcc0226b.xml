@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Django default">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="DataSet2_db">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="DataSet4_db"/>
+    <schema id="3" name="DataSet_db"/>
+    <schema id="4" name="django_db"/>
+    <schema id="5" name="EXAC2_db"/>
+    <schema id="6" name="EXAC3_db"/>
+    <schema id="7" name="EXAC_TEST_db"/>
+    <schema id="8" name="information_schema"/>
+    <schema id="9" name="mysql"/>
+    <schema id="10" name="performance_schema"/>
+    <schema id="11" name="sys"/>
+    <schema id="12" name="Data_db"/>
+    <schema id="13" name="DataSet5_db"/>
+    <table id="14" parent="1" name="auth_group"/>
+    <table id="15" parent="1" name="auth_group_permissions"/>
+    <table id="16" parent="1" name="auth_permission"/>
+    <table id="17" parent="1" name="auth_user"/>
+    <table id="18" parent="1" name="auth_user_groups"/>
+    <table id="19" parent="1" name="auth_user_user_permissions"/>
+    <table id="20" parent="1" name="django_admin_log"/>
+    <table id="21" parent="1" name="django_content_type"/>
+    <table id="22" parent="1" name="django_migrations"/>
+    <table id="23" parent="1" name="django_session"/>
+    <table id="24" parent="1" name="variants_annotation"/>
+    <table id="25" parent="1" name="variants_population"/>
+    <table id="26" parent="1" name="variants_variant"/>
+    <column id="27" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="28" parent="14" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(80)|0</data-type>
+    </column>
+    <index id="29" parent="14" name="name">
+      <columns>name</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="30" parent="14" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="31" parent="14" name="name">
+      <columns>name</columns>
+      <underlying-index>name</underlying-index>
+    </key>
+    <column id="32" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="33" parent="15" name="group_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="34" parent="15" name="permission_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="35" parent="15" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
+      <columns>group_id
+permission_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="36" parent="15" name="auth_group_permissio_permission_id_84c5c92e_fk_auth_perm">
+      <columns>permission_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="37" parent="15" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="38" parent="15" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
+      <columns>group_id
+permission_id</columns>
+      <underlying-index>auth_group_permissions_group_id_permission_id_0cd325b0_uniq</underlying-index>
+    </key>
+    <foreign-key id="39" parent="15" name="auth_group_permissions_group_id_b120cbf9_fk_auth_group_id">
+      <columns>group_id</columns>
+      <ref-key>~.auth_group.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="40" parent="15" name="auth_group_permissio_permission_id_84c5c92e_fk_auth_perm">
+      <columns>permission_id</columns>
+      <ref-key>~.auth_permission.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="41" parent="16" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="42" parent="16" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="43" parent="16" name="content_type_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="44" parent="16" name="codename">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <index id="45" parent="16" name="auth_permission_content_type_id_codename_01ab375a_uniq">
+      <columns>content_type_id
+codename</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="46" parent="16" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="47" parent="16" name="auth_permission_content_type_id_codename_01ab375a_uniq">
+      <columns>content_type_id
+codename</columns>
+      <underlying-index>auth_permission_content_type_id_codename_01ab375a_uniq</underlying-index>
+    </key>
+    <foreign-key id="48" parent="16" name="auth_permission_content_type_id_2f476e4b_fk_django_co">
+      <columns>content_type_id</columns>
+      <ref-key>~.django_content_type.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="49" parent="17" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="50" parent="17" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(128)|0</data-type>
+    </column>
+    <column id="51" parent="17" name="last_login">
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="52" parent="17" name="is_superuser">
+      <mandatory>1</mandatory>
+      <data-type>tinyint(1)|0</data-type>
+    </column>
+    <column id="53" parent="17" name="username">
+      <mandatory>1</mandatory>
+      <data-type>varchar(150)|0</data-type>
+    </column>
+    <column id="54" parent="17" name="first_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="55" parent="17" name="last_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="56" parent="17" name="email">
+      <mandatory>1</mandatory>
+      <data-type>varchar(254)|0</data-type>
+    </column>
+    <column id="57" parent="17" name="is_staff">
+      <mandatory>1</mandatory>
+      <data-type>tinyint(1)|0</data-type>
+    </column>
+    <column id="58" parent="17" name="is_active">
+      <mandatory>1</mandatory>
+      <data-type>tinyint(1)|0</data-type>
+    </column>
+    <column id="59" parent="17" name="date_joined">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <index id="60" parent="17" name="username">
+      <columns>username</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="61" parent="17" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="62" parent="17" name="username">
+      <columns>username</columns>
+      <underlying-index>username</underlying-index>
+    </key>
+    <column id="63" parent="18" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="64" parent="18" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="65" parent="18" name="group_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="66" parent="18" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
+      <columns>group_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="67" parent="18" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
+      <columns>user_id
+group_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="68" parent="18" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="69" parent="18" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
+      <columns>user_id
+group_id</columns>
+      <underlying-index>auth_user_groups_user_id_group_id_94350c0c_uniq</underlying-index>
+    </key>
+    <foreign-key id="70" parent="18" name="auth_user_groups_user_id_6a12ed8b_fk_auth_user_id">
+      <columns>user_id</columns>
+      <ref-key>~.auth_user.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="71" parent="18" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
+      <columns>group_id</columns>
+      <ref-key>~.auth_group.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="72" parent="19" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="73" parent="19" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="74" parent="19" name="permission_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="75" parent="19" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
+      <columns>user_id
+permission_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="76" parent="19" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
+      <columns>permission_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="77" parent="19" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="78" parent="19" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
+      <columns>user_id
+permission_id</columns>
+      <underlying-index>auth_user_user_permissions_user_id_permission_id_14a6b632_uniq</underlying-index>
+    </key>
+    <foreign-key id="79" parent="19" name="auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id">
+      <columns>user_id</columns>
+      <ref-key>~.auth_user.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="80" parent="19" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
+      <columns>permission_id</columns>
+      <ref-key>~.auth_permission.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="81" parent="20" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="82" parent="20" name="action_time">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <column id="83" parent="20" name="object_id">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="84" parent="20" name="object_repr">
+      <mandatory>1</mandatory>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="85" parent="20" name="action_flag">
+      <mandatory>1</mandatory>
+      <data-type>smallint(5) unsigned|0</data-type>
+    </column>
+    <column id="86" parent="20" name="change_message">
+      <mandatory>1</mandatory>
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="87" parent="20" name="content_type_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="88" parent="20" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="89" parent="20" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+      <columns>content_type_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="90" parent="20" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="91" parent="20" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="92" parent="20" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+      <columns>content_type_id</columns>
+      <ref-key>~.django_content_type.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="93" parent="20" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
+      <columns>user_id</columns>
+      <ref-key>~.auth_user.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="94" parent="21" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="95" parent="21" name="app_label">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="96" parent="21" name="model">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <index id="97" parent="21" name="django_content_type_app_label_model_76bd3d3b_uniq">
+      <columns>app_label
+model</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="98" parent="21" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="99" parent="21" name="django_content_type_app_label_model_76bd3d3b_uniq">
+      <columns>app_label
+model</columns>
+      <underlying-index>django_content_type_app_label_model_76bd3d3b_uniq</underlying-index>
+    </key>
+    <column id="100" parent="22" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="101" parent="22" name="app">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="102" parent="22" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="103" parent="22" name="applied">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <key id="104" parent="22" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="105" parent="23" name="session_key">
+      <mandatory>1</mandatory>
+      <data-type>varchar(40)|0</data-type>
+    </column>
+    <column id="106" parent="23" name="session_data">
+      <mandatory>1</mandatory>
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="107" parent="23" name="expire_date">
+      <mandatory>1</mandatory>
+      <data-type>datetime(6)|0</data-type>
+    </column>
+    <index id="108" parent="23" name="django_session_expire_date_a5c62663">
+      <columns>expire_date</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="109" parent="23" name="PRIMARY">
+      <columns>session_key</columns>
+      <primary>1</primary>
+    </key>
+    <column id="110" parent="24" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="111" parent="24" name="Allele">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="112" parent="24" name="Consequence">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="113" parent="24" name="Impact">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="114" parent="24" name="Gene_Symbol">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="115" parent="24" name="Gene">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="116" parent="24" name="Feature">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="117" parent="24" name="Feature_type">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="118" parent="24" name="Biotype">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="119" parent="24" name="Exon">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="120" parent="24" name="Intron">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="121" parent="24" name="HGVS_DNA">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="122" parent="24" name="HGVS_Protein">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="123" parent="24" name="cDNA_position">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="124" parent="24" name="CDS_position">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="125" parent="24" name="Protein_position">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="126" parent="24" name="Amino_acids">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="127" parent="24" name="Codons">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="128" parent="24" name="Existing_variation">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="129" parent="24" name="ALLELE_NUM">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="130" parent="24" name="DISTANCE">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="131" parent="24" name="STRAND">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="132" parent="24" name="VARIANT_CLASS">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="133" parent="24" name="MINIMISED">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="134" parent="24" name="SYMBOL_SOURCE">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="135" parent="24" name="HGNC_ID">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="136" parent="24" name="CANONICAL">
+      <mandatory>1</mandatory>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="137" parent="24" name="TSL">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="138" parent="24" name="CCDS">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="139" parent="24" name="ENSP">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="140" parent="24" name="SWISSPROT">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="141" parent="24" name="TREMBL">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="142" parent="24" name="UNIPARC">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="143" parent="24" name="SIFT">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="144" parent="24" name="PolyPhen">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="145" parent="24" name="DOMAINS">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="146" parent="24" name="HGVS_OFFSET">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="147" parent="24" name="GMAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="148" parent="24" name="AFR_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="149" parent="24" name="AMR_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="150" parent="24" name="ASN_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="151" parent="24" name="EAS_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="152" parent="24" name="EUR_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="153" parent="24" name="SAS_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="154" parent="24" name="AA_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="155" parent="24" name="EA_MAF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="156" parent="24" name="CLIN_SIG">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="157" parent="24" name="SOMATIC">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="158" parent="24" name="PHENO">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="159" parent="24" name="PUBMED">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="160" parent="24" name="MOTIF_NAME">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="161" parent="24" name="MOTIF_POS">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="162" parent="24" name="HIGH_INF_POS">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="163" parent="24" name="MOTIF_SCORE_CHANGE">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="164" parent="24" name="LoF_info">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="165" parent="24" name="LoF_flags">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="166" parent="24" name="LoF_filter">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="167" parent="24" name="LoF">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="168" parent="24" name="context">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="169" parent="24" name="ancestral">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="170" parent="24" name="Population_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="171" parent="24" name="Variant_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="172" parent="24" name="variants_annotation_Population_id_1d159b70_fk_variants_">
+      <columns>Population_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="173" parent="24" name="variants_annotation_Variant_id_68c1e8a9_fk_variants_variant_id">
+      <columns>Variant_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="174" parent="24" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="175" parent="24" name="variants_annotation_Population_id_1d159b70_fk_variants_">
+      <columns>Population_id</columns>
+      <ref-key>~.variants_population.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="176" parent="24" name="variants_annotation_Variant_id_68c1e8a9_fk_variants_variant_id">
+      <columns>Variant_id</columns>
+      <ref-key>~.variants_variant.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="177" parent="25" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="178" parent="25" name="Allele_Count">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="179" parent="25" name="AC_African_American">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="180" parent="25" name="AC_American">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="181" parent="25" name="AC_Adjusted">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="182" parent="25" name="AC_East_Asian">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="183" parent="25" name="AC_Finnish">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="184" parent="25" name="AC_Hemizygous">
+      <mandatory>1</mandatory>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="185" parent="25" name="AC_Heterozygous">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="186" parent="25" name="AC_Homozygous">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="187" parent="25" name="AC_Non_Finnish_European">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="188" parent="25" name="AC_Other">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="189" parent="25" name="AC_South_Asian">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="190" parent="25" name="Allele_Frequency">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="191" parent="25" name="Allele_Number">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="192" parent="25" name="AN_African_American">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="193" parent="25" name="AN_American">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="194" parent="25" name="AN_Adjusted">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="195" parent="25" name="AN_East_Asian">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="196" parent="25" name="AN_Finnish">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="197" parent="25" name="AN_Non_Finnish">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="198" parent="25" name="AN_Other">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="199" parent="25" name="AN_South_Asian">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="200" parent="25" name="Read_Depth">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="201" parent="25" name="Genotype_Quality_MEAN">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="202" parent="25" name="GQ_Standard_Deviation">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="203" parent="25" name="Hemi_African_American">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="204" parent="25" name="Hemi_American">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="205" parent="25" name="Hemi_East_Asian">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="206" parent="25" name="Hemi_Finnish">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="207" parent="25" name="Hemi_Non_Finnish_European">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="208" parent="25" name="Hemi_Other">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="209" parent="25" name="Hemi_South_Asian">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="210" parent="25" name="Het_African_American">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="211" parent="25" name="Het_American">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="212" parent="25" name="Het_East_Asian">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="213" parent="25" name="Het_Finnish">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="214" parent="25" name="Het_Non_Finnish_European">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="215" parent="25" name="Het_Other">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="216" parent="25" name="Het_South_Asian">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="217" parent="25" name="Hom_African_American">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="218" parent="25" name="Hom_American">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="219" parent="25" name="Hom_East_Asian">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="220" parent="25" name="Hom_Finnish">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="221" parent="25" name="Hom_Non_Finnish_European_Homozygous">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="222" parent="25" name="Hom_Other">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="223" parent="25" name="Hom_South_Asian">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="224" parent="25" name="InbreedingCoef">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="225" parent="25" name="DP_HIST">
+      <mandatory>1</mandatory>
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="226" parent="25" name="GQ_HIST">
+      <mandatory>1</mandatory>
+      <data-type>varchar(1000)|0</data-type>
+    </column>
+    <column id="227" parent="25" name="Variant_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="228" parent="25" name="variants_population_Variant_id_b69075b1_fk_variants_variant_id">
+      <columns>Variant_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="229" parent="25" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="230" parent="25" name="variants_population_Variant_id_b69075b1_fk_variants_variant_id">
+      <columns>Variant_id</columns>
+      <ref-key>~.variants_variant.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="231" parent="26" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="232" parent="26" name="Chromosome_Number">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="233" parent="26" name="Position">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="234" parent="26" name="Var_ID">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="235" parent="26" name="Reference">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="236" parent="26" name="Alternate">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="237" parent="26" name="Quality">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="238" parent="26" name="Filter">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <key id="239" parent="26" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

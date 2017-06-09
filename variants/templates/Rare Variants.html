@@ -1,0 +1,119 @@
+{%  include 'NavBar.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="https://raw.github.com/meetselva/fixed-table-rows-cols/master/fixed_table_rc.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  <ul>
+  <br>
+
+  <head>
+<style>
+    .table-wrapper {
+  position:relative;
+}
+.table-scroll {
+  height:400px;
+  overflow:auto;
+  margin-top:20px;
+}
+  .button {
+    background-color:white;
+    border: 2px solid lightsteelblue;
+    border-radius: 12px;
+    color: black;
+    padding: 10px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 2px;
+}
+
+tbody thead tr:nth-child(even) {
+    background-color: #ffffff;
+      table-layout: fixed;
+}
+    form
+{
+    display: inline;
+}
+</style>
+</head>
+<html>
+<body>
+
+<div class="container">
+
+   <b><h2>Rare Variants</h2></b>
+<hr>
+  <div class="alert alert-success">
+    Query Done in {{ query_time }} seconds
+  </div>
+
+
+  <div  class="table-wrapper " >
+      <div class="table-scroll">
+
+        <table id="myTable" class="table table-hover table-fixedheader table-bordered table-striped">
+
+   <thead>
+        <tr bgcolor="#c8dbfd">
+            <th>Variant</th>
+            <th>Chrom</th>
+            <th >Position</th>
+            <th >Filter</th>
+            <th >Consequence</th>
+            <th >Annotation</th>
+            <th >Lof Flags</th>
+            <th >Allele Count</th>
+            <th>Allele Number</th>
+            <th >Number of Homozygous</th>
+            <th>Allele Frequency</th>
+   </thead>
+</tr>
+{% for list in Variants %}
+     <tbody class= "scrollContent">
+
+<tr>
+        <td><font size="2" color="Window">
+        <form action="{% url 'variant_view' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn-link" name="Query" value="{{list.0}}"></form></font></td>
+        <td><font size="2" color="Window">{{ list.1}}</font></td>
+        <td><font size="2" color="Window">{{ list.2}}</font></td>
+        <td><font size="2" color="Window">{{ list.3}}</font></td>
+        <td><font size="2" color="Window">{{ list.4}}</font></td>
+        <td><font size="2" color="Window">{{ list.5}}</font></td>
+        <td><font size="2" color="Window">{{ list.6}}</font></td>
+        <td><font size="2" color="Window">{{ list.7}}</font></td>
+        <td><font size="2" color="Window">{{ list.8}}</font></td>
+        <td><font size="2" color="Window">{{ list.9}}</font></td>
+        <td><font size="2" color="Window">{{ list.10}}</font></td>
+     </tr>
+
+    </tbody>
+
+    {%endfor %}
+</table>
+       </div>
+      </div>
+
+  </div>
+
+
+
+</body>
+</html>
+</ul>
